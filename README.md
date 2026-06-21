@@ -1,353 +1,271 @@
 # AHI
-Artificial-Hybrid-Intelligence (Trí tuệ nhân tạo lai)
+Artificial-Hybrid-Intelligence
 # AHI – Artificial Hybrid Intelligence
-
-## Bước tiến hóa tiếp theo của trí tuệ
 
 ## The Next Evolution of Intelligence
 
-**AHI (Artificial Hybrid Intelligence)** là một sáng kiến nghiên cứu mở nhằm xây dựng thế hệ trí tuệ mới kết hợp giữa con người và trí tuệ nhân tạo.
-**AHI (Artificial Hybrid Intelligence)** is an open research initiative aiming to build a new generation of intelligence that combines humans and artificial intelligence.
+**AHI (Artificial Hybrid Intelligence)** is an open research initiative aiming to create a new generation of intelligence that combines:
 
-AHI không chỉ là một mô hình AI khác.
-AHI is not simply another AI model.
+* Human knowledge
+* Artificial Intelligence
+* Long-term memory systems
+* Digital personality preservation
+* Autonomous reasoning
+* Collective intelligence networks
 
-AHI hướng tới việc xây dựng một hệ sinh thái trí tuệ có khả năng học hỏi, ghi nhớ, tiến hóa và truyền lại tri thức qua nhiều thế hệ.
-AHI aims to build an intelligence ecosystem capable of learning, remembering, evolving, and transferring knowledge across generations.
+Our vision is not simply to build another AI model.
+
+Our goal is to build an intelligence ecosystem capable of learning, evolving, preserving expertise, and collaborating across generations.
 
 ---
 
-# Tầm nhìn
+## Vision
 
-# Vision
-
-Tri thức của nhân loại thường bị mất đi khi các chuyên gia nghỉ hưu hoặc qua đời.
 Human knowledge is often lost when experts retire or pass away.
 
-AHI được tạo ra để giải quyết vấn đề đó.
-AHI was created to address this problem.
+AHI seeks to create a digital intelligence layer that can:
 
-Chúng tôi mong muốn xây dựng một lớp trí tuệ số có khả năng lưu giữ kinh nghiệm, tư duy và tri thức của con người.
-We seek to create a digital intelligence layer capable of preserving human experience, reasoning, and knowledge.
+* Preserve human expertise
+* Retain long-term memory
+* Learn continuously
+* Collaborate with humans
+* Operate independently when required
+* Transfer knowledge across generations
 
-Tri thức không nên biến mất chỉ vì tuổi thọ sinh học kết thúc.
-Knowledge should not disappear simply because a biological lifespan ends.
-
----
-
-# Khái niệm cốt lõi
-
-# Core Concept
-
-AHI được xây dựng trên nền tảng Trí tuệ Lai.
-AHI is built upon the concept of Hybrid Intelligence.
-
-Trí tuệ Con người + Trí tuệ Nhân tạo + Bộ nhớ dài hạn + Tri thức tập thể = AHI.
-Human Intelligence + Artificial Intelligence + Long-Term Memory + Collective Knowledge = AHI.
-
-Khác với các hệ thống AI truyền thống, AHI không chỉ học từ dữ liệu huấn luyện.
-Unlike traditional AI systems, AHI does not rely solely on training data.
-
-AHI hướng tới khả năng ghi nhớ, suy luận, học tập liên tục và cộng tác với con người.
-AHI aims to remember, reason, learn continuously, and collaborate with humans.
+We believe intelligence should not disappear when a biological lifespan ends.
 
 ---
 
-# Mục tiêu dài hạn
+## Core Concept
 
-# Long-Term Objectives
+AHI is based on the idea of Hybrid Intelligence:
 
-## Giai đoạn 1 – Nền tảng
+```
+Human Intelligence
+        +
+Artificial Intelligence
+        +
+Persistent Memory
+        +
+Collective Knowledge
+        =
+Artificial Hybrid Intelligence
+```
 
-## Phase 1 – Foundation
+Unlike traditional AI systems that rely only on training data, AHI aims to integrate:
 
-Xây dựng hệ thống bộ nhớ dài hạn.
-Build a long-term memory system.
-
-Xây dựng cơ sở tri thức dạng đồ thị.
-Build a knowledge graph infrastructure.
-
-Xây dựng nền tảng tác tử thông minh.
-Build an intelligent agent framework.
-
-Xây dựng tầng suy luận.
-Build a reasoning layer.
-
----
-
-## Giai đoạn 2 – Chuyên gia số
-
-## Phase 2 – Digital Experts
-
-Tạo ra các chuyên gia số trong nhiều lĩnh vực.
-Create digital experts across multiple domains.
-
-Kỹ sư số.
-Digital Engineer.
-
-Bác sĩ số.
-Digital Doctor.
-
-Nhà giáo số.
-Digital Teacher.
-
-Luật sư số.
-Digital Lawyer.
-
-Nhà khoa học số.
-Digital Scientist.
-
-Mỗi chuyên gia số có khả năng tích lũy và bảo tồn kinh nghiệm qua thời gian.
-Each digital expert can accumulate and preserve experience over time.
+* Expert knowledge capture
+* Personal memory archives
+* Dynamic reasoning
+* Real-world learning
+* Distributed intelligence
 
 ---
 
-## Giai đoạn 3 – Mạng lưới AHI
+## Long-Term Objectives
 
-## Phase 3 – AHI Network
+### Phase 1 – Foundation
 
-Các thực thể AHI có thể kết nối và cộng tác với nhau.
-AHI instances can connect and collaborate with one another.
+* Knowledge Graph Engine
+* Memory Architecture
+* Agent Framework
+* Reasoning Layer
+* Expert Profile System
 
-Chúng có thể chia sẻ bộ nhớ và tri thức.
-They can share memory and knowledge.
+### Phase 2 – Digital Experts
 
-Chúng có thể học hỏi lẫn nhau.
-They can learn from each other.
+* Digital Engineer
+* Digital Doctor
+* Digital Teacher
+* Digital Lawyer
+* Digital Scientist
 
-Chúng có thể cùng giải quyết các bài toán phức tạp.
-They can jointly solve complex problems.
+Each expert can continuously improve while preserving accumulated experience.
 
----
+### Phase 3 – AHI Network
 
-# Lĩnh vực nghiên cứu
+A distributed ecosystem where AHI instances collaborate and exchange knowledge.
 
-# Research Domains
+Capabilities include:
 
-Trí tuệ Nhân tạo.
-Artificial Intelligence.
-
-Mô hình ngôn ngữ lớn.
-Large Language Models.
-
-Khoa học nhận thức.
-Cognitive Science.
-
-Kỹ nghệ tri thức.
-Knowledge Engineering.
-
-Hệ đa tác tử.
-Multi-Agent Systems.
-
-Bộ nhớ số.
-Digital Memory Systems.
-
-Tương tác người – máy.
-Human-Computer Interaction.
-
-Robot học.
-Robotics.
-
-Hệ thống phân tán.
-Distributed Systems.
+* Shared memory
+* Cooperative reasoning
+* Distributed learning
+* Autonomous task execution
 
 ---
 
-# Ứng dụng tiềm năng
+## Research Domains
 
-# Potential Applications
+AHI combines multiple disciplines:
 
-## Giáo dục
-
-## Education
-
-Gia sư số cá nhân hóa.
-Personalized digital tutors.
-
-Bảo tồn tri thức giáo dục.
-Educational knowledge preservation.
-
-Học tập suốt đời.
-Lifelong learning.
+* Artificial Intelligence
+* Large Language Models
+* Cognitive Science
+* Knowledge Engineering
+* Multi-Agent Systems
+* Digital Memory Systems
+* Human-Computer Interaction
+* Robotics
+* Edge Computing
+* Distributed Systems
 
 ---
 
-## Y tế
+## Potential Applications
 
-## Healthcare
+### Education
 
-Hỗ trợ ra quyết định y khoa.
-Medical decision support.
+* Lifelong digital mentors
+* Personalized learning assistants
+* Knowledge preservation
 
-Lưu giữ tri thức chuyên môn.
-Clinical knowledge preservation.
+### Healthcare
 
-Đào tạo nhân lực y tế.
-Healthcare workforce training.
+* Medical decision support
+* Clinical knowledge retention
+* Healthcare training
 
----
+### Industry
 
-## Công nghiệp
+* Industrial expertise preservation
+* Technical troubleshooting
+* Process optimization
 
-## Industry
+### Government & Defense
 
-Lưu giữ kinh nghiệm chuyên gia.
-Industrial expertise preservation.
+* Strategic knowledge management
+* Expert advisory systems
+* Mission continuity support
 
-Tối ưu quy trình sản xuất.
-Process optimization.
+### Family & Personal Use
 
-Hỗ trợ xử lý sự cố kỹ thuật.
-Technical troubleshooting support.
-
----
-
-## Chính phủ và Quốc phòng
-
-## Government and Defense
-
-Quản lý tri thức chiến lược.
-Strategic knowledge management.
-
-Hệ thống tư vấn chuyên gia.
-Expert advisory systems.
-
-Duy trì năng lực nhiệm vụ dài hạn.
-Long-term mission continuity support.
+* Personal memory archive
+* Family knowledge preservation
+* Digital legacy systems
 
 ---
 
-## Gia đình và cá nhân
+## Proposed Architecture
 
-## Family and Personal Use
-
-Lưu trữ ký ức cá nhân.
-Personal memory archiving.
-
-Bảo tồn tri thức gia đình.
-Family knowledge preservation.
-
-Di sản số cho thế hệ tương lai.
-Digital legacy for future generations.
-
----
-
-# Nguyên tắc phát triển
-
-# Guiding Principles
-
-Con người là trung tâm.
-Human-centered.
-
-AHI được tạo ra để hỗ trợ con người chứ không thay thế con người.
-AHI is designed to augment humans, not replace them.
-
-Minh bạch và có trách nhiệm.
-Transparent and accountable.
-
-An toàn là ưu tiên hàng đầu.
-Safety is a fundamental requirement.
-
-Nghiên cứu mở và hợp tác toàn cầu.
-Open research and global collaboration.
-
-Tư duy dài hạn thay vì lợi ích ngắn hạn.
-Long-term thinking over short-term gains.
+```
++--------------------------------+
+|         User Layer             |
++--------------------------------+
+                |
++--------------------------------+
+|        Interaction Layer       |
++--------------------------------+
+                |
++--------------------------------+
+|        Reasoning Engine        |
++--------------------------------+
+                |
++--------------------------------+
+|         Memory System          |
++--------------------------------+
+                |
++--------------------------------+
+|      Knowledge Graph Layer     |
++--------------------------------+
+                |
++--------------------------------+
+|      Multi-Agent Framework     |
++--------------------------------+
+                |
++--------------------------------+
+|     Compute Infrastructure     |
++--------------------------------+
+```
 
 ---
 
-# Lộ trình
+## Guiding Principles
 
-# Roadmap
+### Human-Centered
 
-## 2026
+AHI is designed to augment humanity, not replace it.
 
-Nghiên cứu kiến trúc nền tảng.
-Research core architecture.
+### Ethical
 
-Xây dựng hệ thống bộ nhớ đầu tiên.
-Build the first memory system.
+Transparency, accountability, and safety are fundamental requirements.
 
-Khởi động cộng đồng mã nguồn mở.
-Launch the open-source community.
+### Open Research
 
----
+We encourage collaboration from researchers, engineers, universities, startups, and organizations worldwide.
 
-## 2027
+### Long-Term Thinking
 
-Ra mắt nguyên mẫu AHI đầu tiên.
-Release the first AHI prototype.
-
-Tích hợp đồ thị tri thức.
-Integrate knowledge graph technology.
-
-Triển khai hệ đa tác tử.
-Deploy multi-agent capabilities.
+AHI is designed with decades—not product cycles—in mind.
 
 ---
 
-## 2028
+## Roadmap
 
-Phát triển các chuyên gia số.
-Develop digital expert modules.
+### 2026
 
-Hoàn thiện bộ nhớ phân tán.
-Build distributed memory systems.
+* Research framework
+* Core architecture design
+* Initial memory system
+* Open-source repository launch
 
-Thực hiện các dự án thử nghiệm thực tế.
-Conduct real-world pilot projects.
+### 2027
 
----
+* First AHI prototype
+* Multi-agent collaboration
+* Knowledge graph integration
 
-## 2030+
+### 2028
 
-Xây dựng hệ sinh thái AHI toàn cầu.
-Build a global AHI ecosystem.
+* Expert intelligence modules
+* Distributed memory system
+* Real-world pilot projects
 
-Tạo nền tảng cộng tác giữa con người và AHI.
-Create a Human-AHI collaboration platform.
+### 2030+
 
-Bảo tồn tri thức chuyên gia trên quy mô thế giới.
-Preserve expert knowledge at global scale.
-
----
-
-# Tham gia dự án
-
-# Contributing
-
-Chúng tôi chào đón các nhà nghiên cứu, kỹ sư, doanh nghiệp và tổ chức tham gia phát triển AHI.
-We welcome researchers, engineers, companies, and organizations to contribute to AHI.
-
-Nếu bạn tin rằng tri thức của nhân loại cần được bảo tồn và phát triển lâu dài, hãy tham gia cùng chúng tôi.
-If you believe humanity's knowledge should be preserved and expanded for the long term, join us.
+* Global AHI ecosystem
+* Human-AHI collaboration platform
+* Digital expertise preservation network
 
 ---
 
-# Người sáng lập
+## Contributing
 
-# Founder
+We welcome contributions from:
 
-Lê Minh Công
-Le Minh Cong
+* AI Researchers
+* Software Engineers
+* Data Scientists
+* Cognitive Scientists
+* Educators
+* Industry Experts
 
-Việt Nam
+If you share the vision of preserving and expanding human intelligence, we invite you to join the project.
+
+---
+
+## Founder
+
+**Le Minh Cong**
+
+Founder of the AHI Initiative
+
 Vietnam
 
 ---
 
-# Tuyên ngôn sứ mệnh
+## Mission Statement
 
-# Mission Statement
-
-Bảo tồn, khuếch đại và mở rộng trí tuệ con người vượt qua các giới hạn sinh học, đồng thời đảm bảo rằng tri thức, kinh nghiệm và sự khôn ngoan luôn sẵn sàng cho các thế hệ tương lai.
-To preserve, amplify, and extend human intelligence beyond biological limitations while ensuring that knowledge, experience, and wisdom remain available for future generations.
+> To preserve, amplify, and extend human intelligence beyond biological limitations while ensuring that knowledge, wisdom, and experience remain available for future generations.
 
 ---
 
-# Khẩu hiệu
+## License
 
-# Motto
+Currently under development.
 
-"Trí tuệ nên tiến hóa, không nên biến mất."
-"Intelligence should evolve, not disappear."
+License selection will be announced during the open-source release phase.
+
+---
+
+*"Intelligence should evolve, not disappear."*
