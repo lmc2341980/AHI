@@ -1,6 +1,14 @@
 # AHI
 Artificial-Hybrid-Intelligence
-# AHI – Artificial Hybrid Intelligence
+![Status](https://img.shields.io/badge/Status-Research-blue)
+
+![Version](https://img.shields.io/badge/Version-0.1.0-green)
+
+![License](https://img.shields.io/badge/License-Proprietary-red)
+
+![Language](https://img.shields.io/badge/Languages-EN%20VI%20JA-orange)
+
+![Made in Vietnam](https://img.shields.io/badge/Made%20in-Vietnam-red)
 <p align="center">
 
 🇺🇸 English |
