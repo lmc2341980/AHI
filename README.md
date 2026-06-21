@@ -1,7 +1,13 @@
 # AHI
 Artificial-Hybrid-Intelligence
 # AHI – Artificial Hybrid Intelligence
+<p align="center">
 
+🇺🇸 English |
+<a href="./README.vi.md">🇻🇳 Tiếng Việt</a> |
+<a href="./README.ja.md">🇯🇵 日本語</a>
+
+</p>
 ## The Next Evolution of Intelligence
 
 **AHI (Artificial Hybrid Intelligence)** is an open research initiative aiming to create a new generation of intelligence that combines:
