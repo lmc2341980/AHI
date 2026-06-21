@@ -8,7 +8,7 @@ Artificial-Hybrid-Intelligence
 <a href="./README.ja.md">🇯🇵 日本語</a>
 
 </p>
-## The Next Evolution of Intelligence
+The Next Evolution of Intelligence
 
 **AHI (Artificial Hybrid Intelligence)** is an open research initiative aiming to create a new generation of intelligence that combines:
 
