@@ -1,21 +1,3 @@
-# AHI – Trí tuệ Nhân tạo Lai
-
-![Trạng thái](https://img.shields.io/badge/Trạng%20thái-Nghiên%20cứu-blue)
-![Phiên bản](https://img.shields.io/badge/Phiên%20bản-1.0.0-green)
-![Giấy phép](https://img.shields.io/badge/Giấy%20phép-Độc%20quyền-red)
-![Ngôn ngữ](https://img.shields.io/badge/Ngôn%20ngữ-EN%20VI%20JA%20RU%20HI%20AR-orange)
-![Sản xuất tại Việt Nam](https://img.shields.io/badge/Sản%20xuất%20tại-Việt%20Nam-red)
-
-<p align="center">
-
-<a href="./README.md">🇺🇸 English</a> | 🇻🇳 Tiếng Việt | <a href="./README.ja.md">🇯🇵 日本語</a> | <a href="./README.ru.md">🇷🇺 Русский</a> | <a href="./README.hi.md">🇮🇳 हिन्दी</a> | <a href="./README.ar.md">🇸🇦 العربية</a>
-
-</p>
-
----
-
-## Tiếng Việt
-
 # AHI
 ## Artificial Hybrid Intelligence
 ## Trí tuệ Nhân tạo Lai
