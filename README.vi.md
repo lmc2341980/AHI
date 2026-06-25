@@ -22,7 +22,7 @@
 
 # Khẩu hiệu
 
-> **Trí tuệ phải tiến hóa, không nên biến mất.**
+> **Trí tuệ cần tiến hóa, không nên biến mất.**
 
 ---
 
