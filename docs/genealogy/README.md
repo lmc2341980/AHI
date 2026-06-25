@@ -1,1 +1,1 @@
-Đang cập nhật
+Cây phả hệ tri thức (Knowledge Genealogy Tree), nơi mỗi cá nhân, gia đình, tổ chức và quốc gia có thể lưu giữ lịch sử, ký ức, kinh nghiệm và truyền lại cho các thế hệ sau. Đây là một điểm khác biệt giữa AHI và nhiều dự án AI hiện nay.
