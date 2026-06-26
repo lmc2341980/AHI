@@ -1,0 +1,35 @@
+name: AHI DocGen AI
+
+on:
+  push:
+    paths:
+      - "source/**"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v4
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run AI Doc Generator
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+        run: node tools/ai-docgen.js source/VISION.vi.md
+
+      - name: Commit generated files
+        run: |
+          git config user.name "AHI Bot"
+          git config user.email "bot@ahi.ai"
+          git add dist
+          git commit -m "auto: generate multilingual docs" || echo "no changes"
+          git push
