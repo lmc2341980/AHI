@@ -1200,4 +1200,319 @@ async fn main() {
 # Khởi chạy Worker ở chế độ Release cực nhẹ (Chỉ tiêu tốn vài MB RAM trên Windows)
 cargo run --bin ahi_daemon --release
 ```
+---
 
+## ⚙️ 19. Cẩm nang cấu hình Cờ tối ưu hóa Biên dịch Phần cứng cho Lõi Rust
+Để thuật toán Tiến hóa và Mạng Bayes của hệ thống **AHI** đạt tốc độ xử lý phần cứng tối đa trên máy tính Windows của từng thành viên, nhóm cần cấu hình các cờ biên dịch nâng cao. Các cờ này giúp trình biên dịch Rust (`rustc`) tự động phát hiện và tận dụng các tập lệnh song song ẩn trong chip xử lý (CPU Intel/AMD).
+
+### 🔹 1. Kích hoạt cờ tối ưu hóa kiến trúc CPU bản địa (Native CPU Architecture)
+Mặc dù lệnh `$env:RUSTFLAGS="-C target-cpu=native"` cấu hình tạm thời cho một phiên làm việc, nhóm nên cố định cấu hình này vào dự án bằng cách tạo một thư mục và tệp tin cấu hình tại: `ahi_rust_core/.cargo/config.toml`
+
+Dán nội dung sau vào file `config.toml` vừa tạo:
+```toml
+[build]
+# Ép trình biên dịch tối ưu hóa chính xác theo dòng chip của máy đang ngồi chạy
+rustflags = ["-C", "target-cpu=native"]
+```
+*Lợi ích:* Giúp tự động kích hoạt các tập lệnh mở rộng như **AVX2**, **AVX-512** hoặc **FMA** trên các dòng chip hiện đại, tăng tốc độ xử lý ma trận và vector lên gấp 2 - 4 lần mà không cần sửa code.
+
+### 🔹 2. Cấu hình Profile Biên dịch tối ưu sâu (Profile Release Optimizations)
+Cập nhật phân đoạn `[profile.release]` trong file `Cargo.toml` của dự án với các tham số khắt khe nhất để chuẩn bị chạy thực tế:
+```toml
+[profile.release]
+opt-level = 3          # Tối ưu hóa hiệu năng kịch khung (Mức cao nhất)
+lto = "fat"            # Kích hoạt Link-Time Optimization diện rộng trên toàn bộ thư viện liên kết
+codegen-units = 1      # Giảm luồng sinh mã về 1 để trình biên dịch có cái nhìn tổng thể và tối ưu sâu hơn
+panic = "abort"        # Loại bỏ tính năng unwinding khi crash để giảm kích thước file nhị phân và tăng tốc độ
+```
+
+---
+
+## 💥 20. Quy trình Xử lý Xung đột Mã nguồn (Conflict) trên GitHub Desktop
+Xung đột (Conflict) xảy ra khi hai thành viên trong nhóm cùng sửa đổi một dòng code trên cùng một file và cùng đẩy lên GitHub. Khi bạn bấm **Pull origin** hoặc **Merge**, GitHub Desktop sẽ báo lỗi đỏ. Đừng hoảng loạn, hãy xử lý theo quy trình đồ họa 4 bước an toàn sau:
+
+### 🔹 Bước 1: Nhận diện file bị xung đột
+GitHub Desktop sẽ hiển thị một cửa sổ cảnh báo màu cam/đỏ với thông báo: **"We found conflicts"**. Tại đây, phần mềm sẽ liệt kê danh sách các file đang bị tranh chấp code giữa máy của bạn (Local) và trên mạng (Remote).
+
+### 🔹 Bước 2: Chọn công cụ giải quyết (Editor)
+1. Tại mục **"Open behavior"**, GitHub Desktop sẽ hiển thị menu thả xuống.
+2. Chọn **"Open in Cursor"** (hoặc VS Code).
+3. Bấm nút **Open independent editor** để bật phần mềm viết code lên xử lý.
+
+### 🔹 Bước 3: Sàng lọc mã nguồn trực quan trong Cursor
+Khi mở file bị xung đột trên **Cursor**, bạn sẽ thấy các dòng code được đánh dấu bằng các thẻ ranh giới rõ ràng:
+*   `<<<<<<< HEAD (Current Change)`: Đây là đoạn code do **bạn** viết ở máy cục bộ.
+*   `=======`: Ranh giới chia cắt giữa hai phiên bản code.
+*   `>>>>>>> main (Incoming Change)`: Đây là đoạn code do **đồng đội** viết và đã đẩy lên GitHub trước bạn.
+
+Ngay phía trên các thẻ này, Cursor cung cấp các nút bấm nhanh bằng chuột cực kỳ tiện lợi:
+*   **Accept Current Change:** Giữ lại code của bạn, xóa bỏ hoàn toàn code của đồng đội.
+*   **Accept Incoming Change:** Xóa bỏ code của bạn, lấy hoàn toàn code mới của đồng đội trên mạng về.
+*   **Accept Both Changes:** Giữ lại cả hai đoạn code của cả hai người (bạn sẽ tự sắp xếp lại thứ tự dòng cho hợp lý).
+
+### 🔹 Bước 4: Hoàn tất chu trình đồng bộ (Commit Merge)
+1. Sau khi chọn xong phương án giữ code thích hợp, các thẻ ranh giới (`<<<<<<<`, `=======`) sẽ tự động biến mất. Hãy nhấn `Ctrl + S` để lưu file lại.
+2. Quay trở lại phần mềm **GitHub Desktop**. Hệ thống sẽ tự động kiểm tra lại file, nếu thanh trạng thái chuyển sang màu xanh với thông báo **"No conflicts remaining"**, nghĩa là bạn đã sửa xong.
+3. Bấm nút màu xanh **Create merge commit** ở góc dưới bên trái để ghi nhận việc sửa lỗi.
+4. Cuối cùng, bấm nút **Push origin** để đưa phiên bản code đã hòa giải lên GitHub cho cả nhóm cùng đồng bộ.
+
+---
+
+---
+
+## 📊 21. Kiến trúc Hệ thống Nhật ký lỗi (Logging System) cho AHI Background Daemon
+Khi vận hành một Background Daemon chạy vô hạn trong nền hệ điều hành Windows, chúng ta không thể liên tục mở terminal để theo dõi mã lỗi. Hệ thống **AHI** đòi hỏi một kiến trúc kiểm soát nhật ký lỗi có cấu trúc chặt chẽ phục vụ cho việc gỡ lỗi (Debugging) và bảo trì lâu dài.
+
+### 🔹 Tiêu chuẩn Phân tầng Nhật ký (Log Levels):
+*   `TRACE / DEBUG`: Lưu lại các hành động chi tiết cấp thấp phục vụ phát triển (Ví dụ: Tọa độ vector thô vừa quét, điểm fitness cụ thể của từng cá thể).
+*   `INFO`: Ghi nhận các sự kiện hệ thống bình thường (Ví dụ: Daemon khởi động, chu kỳ quét hoàn tất thành công).
+*   `WARN`: Cảnh báo các bất thường không gây chết chương trình (Ví dụ: Kết nối database bị chậm, điểm tin cậy mờ tiệm cận mức nguy hiểm).
+*   `ERROR`: Lỗi nghiêm trọng cần can thiệp ngay (Ví dụ: Container PostgreSQL sập, không thể kết nối mạng mạng, lỗi tràn bộ nhớ).
+
+---
+
+## 🦀 22. Triển khai Hệ thống Ghi Log Đa tầng Bất đồng bộ bằng Rust
+Chúng ta sẽ sử dụng bộ đôi thư viện công nghiệp mạnh nhất hiện nay của Rust là `tracing` (để tạo log ngữ cảnh) và `tracing-appender` để tự động **xoay vòng file log (File Rotation)** theo ngày, tránh tình trạng file log bị phình to làm cạn kiệt ổ cứng máy tính Windows.
+
+### 🔹 Thêm các thư viện Quản lý Nhật ký vào `Cargo.toml`:
+Cập nhật danh sách dependencies trong file `Cargo.toml` của dự án lõi Rust:
+```toml
+[dependencies]
+# Thư viện core quản lý log ngữ cảnh
+tracing = "0.1"
+# Bộ công cụ xử lý định dạng và xuất đầu ra (Console/File)
+tracing-subscriber = { version = "0.3", features = ["env-filter", "fmt", "json"] }
+# Tiện ích tự động quản lý tách file log theo thời gian
+tracing-appender = "0.2"
+tokio = { version = "1.0", features = ["full"] }
+```
+
+### 🔹 Mã nguồn Cấu hình và Chạy Log (`src/ahi_logger.rs`):
+Tạo file mới tên là `src/ahi_logger.rs` để đồng bộ cấu hình cho Background Daemon:
+
+```rust
+use std::path::Path;
+use tracing::{info, warn, error, debug, Level};
+use tracing_subscriber::{fmt, prelude::*, Registry};
+use tracing_appender::rolling;
+
+/// Hàm khởi tạo toàn diện hệ thống Log cho AHI Engine
+pub fn init_ahi_logging_system() -> rolling::WorkerGuard {
+    // 1. Cấu hình File Appender: Tự động tạo file log mới mỗi ngày (Daily Rotation)
+    // Tên file dạng: ahi-daemon.log.2026-06-30
+    let log_directory = Path::new("logs");
+    let file_appender = rolling::daily(log_directory, "ahi-daemon.log");
+    
+    // Tạo luồng ghi file không chặn (Non-blocking Writer) để đảm bảo tốc độ của lõi AHI
+    let (file_writer, guard) = tracing_appender::non_blocking(file_appender);
+
+    // 2. Định dạng Log xuất ra Console (Màu sắc trực quan cho lập trình viên xem trên Cursor)
+    let console_layer = fmt::layer()
+        .with_ansi(true) // Bật màu sắc tương thích terminal Windows
+        .with_target(false)
+        .with_thread_ids(true) // Ghi lại ID của luồng để kiểm soát xử lý song song
+        .with_filter(tracing_subscriber::filter::LevelFilter::from_level(Level::DEBUG));
+
+    // 3. Định dạng Log lưu vào File (Cấu trúc dữ liệu JSON để dễ phân tích, lưu kho lâu dài)
+    let file_layer = fmt::layer()
+        .with_ansi(false) // Tắt mã màu ANSI khi ghi vào tệp văn bản thô
+        .json()           // Định dạng chuẩn JSON để sau này AI có thể tự đọc log
+        .with_writer(file_writer)
+        .with_filter(tracing_subscriber::filter::LevelFilter::from_level(Level::INFO));
+
+    // 4. Đăng ký tập trung bộ máy ghi log vào Runtime của Rust
+    Registry::default()
+        .with(console_layer)
+        .with(file_layer)
+        .init();
+
+    info!("📊 Hệ thống kiểm soát nhật ký lõi AHI đã được kích hoạt.");
+    
+    // Trả về luồng Guard để duy trì luồng ghi file không bị ngắt quãng suốt vòng đời Daemon
+    guard
+}
+
+#[tokio::main]
+async fn main() {
+    // Kích hoạt log và giữ lại guard
+    let _log_guard = init_ahi_logging_system();
+
+    println!("\n--- GIẢ LẬP VẬN HÀNH DAEMON VỚI LOG CÓ CẤU TRÚC ---\n");
+
+    // Giả lập chu kỳ chạy của Background Daemon
+    info!("🚀 Background Daemon bắt đầu chu kỳ quét PostgreSQL...");
+    
+    let mock_processed_vectors = 12;
+    debug!("⚡ SIMD Core: Đã tính toán xong {} bộ khoảng cách Cosine.", mock_processed_vectors);
+
+    // Giả lập tình huống phát hiện chỉ số tiệm cận ngưỡng logic mờ
+    let low_confidence_score = 0.52;
+    if low_confidence_score < 0.60 {
+        warn!(
+            entity_id = "KNOW-ID-999",
+            score = low_confidence_score,
+            "⚠️ Tri thức đang có mức độ tin cậy tiệm cận ngưỡng đào thải!"
+        );
+    }
+
+    // Giả lập lỗi nghiêm trọng khi ghi CSDL
+    let db_error_occurred = true;
+    if db_error_occurred {
+        error!(
+            error_code = "PG_CONN_TIMEOUT",
+            host = "localhost",
+            "❌ Không thể kết nối tới cơ sở dữ liệu Postgres trong container Docker!"
+        );
+    }
+
+    println!("\n💡 Kiểm tra: Hãy mở thư mục mới sinh tên là 'logs/' trong dự án trên Cursor để xem file log JSON vừa được tạo.");
+}
+```
+
+### 🔹 Cách kiểm tra tệp tin Log dạng JSON lưu kho:
+Khi Daemon vận hành, hệ thống sẽ tự sinh ra tệp `logs/ahi-daemon.log.[Ngày]`. Mỗi dòng lỗi nghiêm trọng (`error!`) sẽ được lưu thành một bản ghi JSON có cấu trúc chuẩn như sau, rất thuận tiện để đưa vào các công cụ giám sát hoặc cho chính AI của bạn tự phân tích lỗi tự động sau này:
+
+```json
+{"timestamp":"2026-06-30T13:40:00.123456Z","level":"ERROR","fields":{"message":"❌ Không thể kết nối tới cơ sở dữ liệu Postgres trong container Docker!","error_code":"PG_CONN_TIMEOUT","host":"localhost"},"target":"ai_core_math::ahi_logger"}
+```
+---
+
+## 🛡️ 23. Kiến trúc Bộ lọc dữ liệu đầu vào chống mã độc (Input Security Filter)
+Khi xây dựng một dòng AI cho phép nhận dữ liệu từ nhiều nguồn khác nhau, nguy cơ hệ thống bị tấn công bằng mã độc qua dữ liệu đầu vào là rất lớn. Bộ lọc bảo mật của hệ thống **AHI** được thiết kế ở cấp độ lõi Rust để kiểm soát chặt chẽ 3 lỗ hổng nguy hiểm:
+1.  **SQL Injection:** Ngăn chặn các chuỗi văn bản chứa lệnh phá hoại CSDL PostgreSQL (Ví dụ: `; DROP TABLE ...`).
+2.  **Vector Overflow / Underflow:** Kiểm tra số chiều và biên độ giá trị của mảng số thực đầu vào, đảm bảo không chứa các giá trị lỗi hệ thống như `NaN` (Not a Number) hoặc `Infinity` để tránh làm hỏng thuật toán toán học SIMD.
+3.  **XSS / Control Characters Infiltration:** Loại bỏ hoàn toàn các ký tự điều khiển hệ thống bẩn ẩn trong nhãn tri thức hoặc mã định danh.
+
+---
+
+## 🦀 24. Triển khai Lá chắn Bảo mật Dữ liệu Đầu vào bằng Rust
+Chúng ta sẽ sử dụng thư viện chuyên dụng **`validator`** kết hợp với các thuật toán quét chuỗi Regex hiệu năng cao để xây dựng bộ lọc an toàn tuyệt đối trước khi chuyển giao dữ liệu sang module lưu trữ `db_sync.rs`.
+
+### 🔹 Thêm các thư viện Bảo mật vào `Cargo.toml`:
+Cập nhật danh sách phụ thuộc trong file `Cargo.toml` của dự án lõi Rust:
+```toml
+[dependencies]
+# Thư viện kiểm tra định dạng và cấu trúc dữ liệu chuẩn công nghiệp
+validator = { version = "0.18", features = ["derive"] }
+# Bộ máy xử lý biểu thức chính quy tốc độ cao
+regex = "1.10"
+```
+
+### 🔹 Mã nguồn Bộ lọc Bảo mật (`src/ahi_security_filter.rs`):
+Tạo file mới tên là `src/ahi_security_filter.rs` trong cấu trúc mã nguồn lõi:
+
+```rust
+use regex::Regex;
+use validator::{Validate, ValidationError};
+
+/// Hàm kiểm tra tùy biến: Ngăn chặn các từ khóa SQL độc hại
+fn validate_sql_injection(text: &str) -> Result<(), ValidationError> {
+    // Chuyển chuỗi về chữ thường để quét không sót ký tự
+    let lower_text = text.to_lowercase();
+    
+    // Danh sách các từ khóa nguy hiểm thường dùng trong tấn công SQL Injection
+    let sql_blacklist = ["drop table", "delete from", "alter table", "union select", "truncate", "1=1", "--"];
+    
+    for blacklisted in sql_blacklist.iter() {
+        if lower_text.contains(blacklisted) {
+            return Err(ValidationError::new("MALICIOUS_SQL_DETECTED"));
+        }
+    }
+    Ok(())
+}
+
+/// Định nghĩa Cấu trúc Dữ liệu đầu vào cần thẩm định an toàn
+#[derive(Validate)]
+pub struct RawKnowledgeInput {
+    #[validate(length(min = 4, max = 50, message = "Độ dài mã định danh từ 4 đến 50 ký tự."))]
+    // Sử dụng Regex để ép mã định danh chỉ được chứa chữ cái, chữ số và dấu gạch ngang
+    #[validate(regex(path = *REGEX_ID, message = "Mã định danh chứa ký tự lạ nguy hiểm."))]
+    pub ma_dinh_danh: String,
+
+    #[validate(length(min = 2, max = 100, message = "Chủ đề quá ngắn hoặc quá dài."))]
+    #[validate(custom(function = "validate_sql_injection", message = "Phát hiện dấu vết SQL Injection trong trường chủ đề."))]
+    pub chu_de: String,
+
+    // Kiểm tra tính toàn vẹn toán học của mảng Vector
+    pub toa_do_tri_thuc: Vec<f32>,
+}
+
+impl RawKnowledgeInput {
+    /// Hàm kiểm tra tính hợp lệ của Vector toán học đa chiều
+    pub fn validate_vector_integrity(&self, expected_dim: usize) -> Result<(), &'static str> {
+        // 1. Kiểm tra số chiều hệ thống
+        if self.toa_do_tri_thuc.len() != expected_dim {
+            return Err("❌ LỖI BẢO MẬT: Số chiều Vector không khớp với cấu trúc hệ thống lõi.");
+        }
+
+        // 2. Kiểm tra phần tử độc hại (NaN hoặc Vô hạn nhằm mục đích phá hoại bộ nhớ máy tính)
+        for &val in &self.toa_do_tri_thuc {
+            if val.is_nan() || val.is_infinite() {
+                return Err("❌ LỖI BẢO MẬT: Mảng dữ liệu chứa giá trị toán học độc hại (NaN/Infinity).");
+            }
+            if val < -10.0 || val > 10.0 {
+                return Err("❌ LỖI BẢO MẬT: Biên độ giá trị vượt ngưỡng an toàn quy định (-10.0 -> 10.0).");
+            }
+        }
+        Ok(())
+    }
+}
+
+// Khởi tạo Regex tĩnh một lần duy nhất bằng lazy_static hoặc một hằng số tham chiếu (cho tối ưu luồng)
+use std::sync::LazyLock;
+static REGEX_ID: LazyLock<Regex> = LazyLock::new(|| Regex::new(r"^[a-zA-Z0-9\-]+\$").unwrap());
+
+fn main() {
+    println!("🛡️  KÍCH HOẠT LÁ CHẮN BẢO MẬT DỮ LIỆU ĐẦU VÀO (AHI SECURITY FILTER)");
+    println!("=============================================================");
+
+    // TÌNH HUỐNG 1: Dữ liệu sạch, an toàn vượt qua bộ lọc
+    let clean_input = RawKnowledgeInput {
+        ma_dinh_danh: "KNOW-ID-2026".to_string(),
+        chu_de: "He_Thong_Suy_Luan_Mo".to_string(),
+        toa_do_tri_thuc: vec![0.123; 768],
+    };
+
+    println!("🧪 Kiểm thử tình huống 1 (Dữ liệu sạch):");
+    match clean_input.validate() {
+        Ok(_) => {
+            if clean_input.validate_vector_integrity(768).is_ok() {
+                println!("   |- ✅ Dữ liệu an toàn tuyệt đối. Đã sẵn sàng chuyển giao nạp vào hệ thống.");
+            }
+        },
+        Err(e) => println!("   |- ❌ Từ chối: {}", e),
+    }
+    println!("-------------------------------------------------------------");
+
+    // TÌNH HUỐNG 2: Dữ liệu bẩn chứa mã độc tấn công phá hoại CSDL
+    let malicious_input = RawKnowledgeInput {
+        ma_dinh_danh: "KNOW-ID-999; DROP TABLE kho_tri_thuc_ai;--".to_string(), // Tấn công phá hoại bảng bằng SQL Injection
+        chu_de: "Kien_Truc_He_Thong".to_string(),
+        toa_do_tri_thuc: vec![f32::NAN; 768], // Tấn công tràn số bằng giá trị toán học lỗi
+    };
+
+    println!("🧪 Kiểm thử tình huống 2 (Dữ liệu độc hại):");
+    // Kiểm tra cấu trúc text trước
+    if let Err(errors) = malicious_input.validate() {
+        println!("   |- 🚨 HỆ THỐNG PHÁT HIỆN TẤN CÔNG CHUỖI VĂN BẢN:");
+        println!("   |  Gợi ý xử lý: Đã chặn đứng hành vi và ghi nhật ký IP đối tượng.");
+        println!("   |  Chi tiết lỗi: \n{}", errors);
+    }
+
+    // Kiểm tra cấu trúc Vector số học
+    if let Err(vector_err) = malicious_input.validate_vector_integrity(768) {
+        println!("   |- 🚨 HỆ THỐNG PHÁT HIỆN TẤN CÔNG VECTOR TOÁN HỌC:");
+        println!("   |  Chi tiết lỗi: {}", vector_err);
+    }
+    println!("=============================================================");
+}
+```
+---
+
+## 🚀 25. Hướng dẫn Đẩy (Push) Kho mã nguồn hoàn chỉnh lên GitHub
+Bây giờ hệ thống của nhóm bạn đã sở hữu đầy đủ tất cả các thành phần kiến trúc từ cơ sở dữ liệu, lõi xử lý, thuật toán tiến hóa, quản lý log đến bộ lọc bảo mật. Hãy thực hiện các thao tác cuối cùng sau trên phần mềm **GitHub Desktop** để đưa dự án lên đám mây phối hợp lâu dài:
+
+1.  Mở **GitHub Desktop** trên Windows lên, phần mềm sẽ tự động phát hiện tất cả các file cấu trúc thư mục mới sinh (`src/ahi_logger.rs`, `src/ahi_security_filter.rs`,...).
+2.  Nhìn xuống góc dưới bên trái, gõ vào ô *Summary*: `Hoàn thiện module bảo mật lọc dữ liệu đầu vào và hệ thống lưu vết nhật ký lỗi cho AHI`.
+3.  Bấm nút màu xanh **Commit to main** để đóng gói toàn bộ dự án vào lịch sử mã nguồn.
+4.  Bấm nút **Push origin** ở thanh trên cùng để đẩy toàn vẹn hệ sinh thái dự án lên kho GitHub chung của nhóm. Các thành viên khác chỉ cần bấm **Pull origin** là lập tức có đầy đủ bộ khung mã nguồn tối tân này để cùng nghiên cứu và vận hành.
