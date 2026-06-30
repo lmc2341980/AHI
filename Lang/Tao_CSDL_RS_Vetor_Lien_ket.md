@@ -1,5 +1,6 @@
 # TÀI LIỆU HƯỚNG DẪN: THIẾT KẾ CƠ SỞ DỮ LIỆU LAI (HYBRID DATABASE) CHO AI THẾ HỆ MỚI
-*Tích hợp lưu trữ quan hệ dữ liệu (DR) và Không gian Vector đa chiều*
+*Tích hợp lưu trữ quan hệ dữ liệu (DR) và Không gian Vector đa chiều*.
+---
 Toàn bộ cấu trúc hệ sinh thái cho dự án AHI (Artificial Hybrid Intelligence) đã được thiết lập đồng bộ từ: Hạ tầng CSDL Lai (DR + Vector), Lõi xử lý toán học SIMD Rust, Giải thuật Tiến hóa & Logic Mờ, cho đến Background Daemon tự động hóa.
 ---
 
