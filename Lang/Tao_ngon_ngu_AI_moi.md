@@ -1,4 +1,4 @@
-# HƯỚNG DẪN ĐỊNH HƯỚNG KIẾN TRÚC & QUY TRÌNH PHÁT TRIỂN DỰ ÁN AI THẾ HỆ MỚI
+# HƯỚNG DẪN ĐỊNH HƯỚNG KIẾN TRÚC & QUY TRÌNH PHÁT TRIỂN DỰ ÁN AHI THẾ HỆ MỚI
 *Tài liệu nội bộ dành cho đội ngũ phát triển dự án nghiên cứu dòng AI tách biệt với AGI và HAI*
 
 ---
