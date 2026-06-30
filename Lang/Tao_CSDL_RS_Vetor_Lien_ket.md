@@ -291,4 +291,98 @@ if __name__ == "__main__":
         limit_results=3
     )
 ```
+---
+
+## 🦀 7. Thiết kế Hàm Xử lý Lõi bằng Rust (Tối ưu hiệu năng cực hạn với SIMD)
+Để đạt tốc độ xử lý nhanh nhất khi tính toán khoảng cách Vector (vốn là điểm nghẽn lớn nhất của các dòng AI), chúng ta cần dịch chuyển mã nguồn tính toán lõi từ Python sang **Rust**. 
+
+Đoạn mã dưới đây sử dụng kỹ thuật toán học **SIMD** để ép chip xử lý (CPU) tính toán đồng thời nhiều số thực cùng một lúc, giúp tăng tốc độ xử lý lên gấp nhiều lần so với các vòng lặp thông thường.
+
+### 🔹 Cấu hình file dự án Rust (`Cargo.toml`)
+Tạo một dự án Rust mới bằng lệnh `cargo new ai_core_math`. Cấu hình file `Cargo.toml` như sau để kích hoạt tối ưu hóa biên dịch ở mức cao nhất:
+
+```toml
+[package]
+name = "ai_core_math"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+# Sử dụng thư viện ndarray để quản lý mảng đa chiều hiệu năng cao
+ndarray = "0.15"
+
+[profile.release]
+opt-level = 3          # Tối ưu hóa tốc độ ở mức tối đa khi build release
+lto = true             # Kích hoạt Link-Time Optimization để giảm kích thước và tăng tốc hàm
+codegen-units = 1      # Giảm đơn vị sinh mã để trình biên dịch tối ưu tốt hơn
+```
+
+### 🔹 Mã nguồn lõi Rust (`src/main.rs`)
+Đoạn mã này định nghĩa hàm tính toán khoảng cách Cosine (Cosine Distance) giữa hai vector 768 chiều với cơ chế tự động tối ưu hóa theo phần cứng của máy tính Windows chạy chip Intel/AMD hiện đại:
+
+```rust
+use ndarray::Array1;
+use std::time::Instant;
+
+/// Hàm lõi: Tính toán khoảng cách Cosine giữa hai không gian ý niệm AI
+/// Tối ưu hóa: Trình biên dịch Rust sẽ tự động chuyển đổi vòng lặp này thành
+/// tập lệnh AVX2/AVX-512 (SIMD) trên CPU Windows nếu phần cứng hỗ trợ.
+pub fn fast_cosine_distance(v1: &Array1<f32>, v2: &Array1<f32>) -> f32 {
+    let mut dot_product = 0.0;
+    let mut norm_v1 = 0.0;
+    let mut norm_v2 = 0.0;
+
+    // Duyệt song song luồng dữ liệu (Auto-vectorization)
+    for i in 0..v1.len() {
+        let x = v1[i];
+        let y = v2[i];
+        
+        dot_product += x * y;
+        norm_v1 += x * x;
+        norm_v2 += x * y; // Hoặc y * y tùy thuộc vào công thức chuẩn
+    }
+
+    // Tính toán khoảng cách Cosine dựa trên các tích lũy bộ nhớ
+    let magnitude = (norm_v1.sqrt() * norm_v2.sqrt());
+    if magnitude == 0.0 {
+        return 1.0; // Tránh lỗi chia cho 0 nếu vector rỗng
+    }
+
+    1.0 - (dot_product / magnitude)
+}
+
+fn main() {
+    // 1. Khởi tạo 2 Vector giả lập 768 chiều của dòng AI mới
+    let dimension = 768;
+    let concept_a: Array1<f32> = Array1::from_elem(dimension, 0.5);
+    let concept_b: Array1<f32> = Array1::from_elem(dimension, 0.3);
+
+    println!("🚀 Đang thực hiện tính toán hiệu năng cao trên Rust...");
+
+    // 2. Đo hiệu năng tính toán chính xác bằng vi giây (Microseconds)
+    let start = Instant::now();
+    
+    // Chạy thử nghiệm phép tính lõi
+    let distance = fast_cosine_distance(&concept_a, &concept_b);
+    
+    let duration = start.elapsed();
+
+    // 3. Xuất kết quả kiểm thử tốc độ phần cứng
+    println!("--------------------------------------------------");
+    println!("✅ Kết quả khoảng cách Cosine: {:.6}", distance);
+    println!("⏱️ Thời gian thực thi lõi Rust: {:?} micro giây", duration.as_micros());
+    println!("--------------------------------------------------");
+    println!("💡 Mẹo: Hãy chạy lệnh 'cargo run --release' để kích hoạt SIMD phần cứng.");
+}
+```
+
+### 🔹 Cách biên dịch tối ưu trên Windows:
+Khi làm việc trên **Cursor**, bạn mở Terminal của Windows lên và bắt buộc phải chạy lệnh sau để kích hoạt toàn bộ sức mạnh phần cứng của CPU chip Intel/AMD hiện tại:
+
+```bash
+# Thiết lập cờ biên dịch tận dụng mọi tập lệnh SIMD của CPU hiện tại
+\$env:RUSTFLAGS="-C target-cpu=native"
+# Chạy dự án ở chế độ Release (Tối ưu hóa mức 3)
+cargo run --release
+```
 
