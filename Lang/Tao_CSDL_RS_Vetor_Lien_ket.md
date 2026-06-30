@@ -186,4 +186,109 @@ def connect_and_seed():
 if __name__ == "__main__":
     connect_and_seed()
 ```
+---
+
+## 🔍 6. Script Python Thực hiện Truy vấn Lai (Hybrid Search Pipeline)
+Sau khi đã nạp dữ liệu, đây là đoạn mã Python hoàn chỉnh giúp hệ thống thực hiện tìm kiếm lai. Hàm tìm kiếm này kết hợp đồng thời hai cơ chế:
+1.  **Lọc cứng (Relational Search):** Chỉ quét các bản ghi thuộc đúng `chu_de` chỉ định và có `muc_do_tin_cay` (tham số logic mờ) vượt qua ngưỡng tối thiểu.
+2.  **Quét mềm (Vector Search):** Tính toán khoảng cách Cosine giữa Vector truy vấn và dữ liệu trong kho, sắp xếp để lấy ra các kết quả có độ tương đồng cao nhất.
+
+### 🔹 Cài đặt thư viện bổ trợ (nếu chưa cài):
+```bash
+pip install psycopg2-binary numpy
+```
+
+### 🔹 Mã nguồn Python (`hybrid_search.py`):
+```python
+import psycopg2
+import numpy as np
+
+def execute_hybrid_search(search_topic, min_confidence, query_vector, limit_results=5):
+    """
+    Thực hiện truy vấn lai (Hybrid Search): Lọc theo thuộc tính quan hệ và tìm kiếm khoảng cách vector
+    """
+    # Cấu hình kết nối đến Docker Postgres
+    db_config = {
+        "host": "localhost",
+        "database": "core_knowledge_base",
+        "user": "ai_developer",
+        "password": "SecretPassword123",
+        "port": 5432
+    }
+    
+    # Chuyển đổi mảng numpy sang chuỗi text định dạng '[v1,v2,v3,...]' để truyền vào pgvector
+    vector_string = "[" + ",".join(map(str, query_vector.tolist())) + "]"
+    
+    conn = None
+    try:
+        conn = psycopg2.connect(**db_config)
+        cursor = conn.cursor()
+
+        # Câu lệnh SQL thực hiện Truy vấn Lai (Hybrid Query)
+        # Toán tử <=> trong pgvector đại diện cho việc tính Khoảng cách Cosine (Cosine Distance)
+        # Khoảng cách càng nhỏ (gần về 0) nghĩa là hai Ý niệm/Vector càng giống nhau
+        hybrid_query = """
+        SELECT 
+            id, 
+            ma_dinh_danh, 
+            chu_de, 
+            muc_do_tin_cay,
+            (toa_do_tri_thuc <=> %s::vector) AS khoang_cach_cosine
+        FROM 
+            kho_tri_thuc_ai
+        WHERE 
+            chu_de = %s 
+            AND muc_do_tin_cay >= %s
+        ORDER BY 
+            toa_do_tri_thuc <=> %s::vector ASC
+        LIMIT %s;
+        """
+
+        # Truyền tham số an toàn chống lỗi SQL Injection
+        query_params = (vector_string, search_topic, min_confidence, vector_string, limit_results)
+        
+        cursor.execute(hybrid_query, query_params)
+        records = cursor.fetchall()
+
+        print(f"\n=== KẾT QUẢ TRUY VẤN LAI (Chủ đề: '{search_topic}' | Ngưỡng tin cậy >= {min_confidence}) ===")
+        if not records:
+            print("❌ Không tìm thấy bản ghi nào thỏa mãn điều kiện.")
+            return
+
+        for row in records:
+            rec_id, ma_dinh, chu_de, tin_cay, distance = row
+            # Độ tương đồng toán học (Cosine Similarity) = 1 - Khoảng cách Cosine
+            similarity_score = (1 - distance) * 100 
+            
+            print(f"📍 Mã định danh: {ma_dinh}")
+            print(f"   |- Độ tin cậy (Logic mờ): {float(tin_cay):.2f}")
+            print(f"   |- Độ tương đồng Vector : {similarity_score:.2f}% (Khoảng cách: {distance:.4f})")
+            print("-" * 50)
+
+    except Exception as error:
+        print(f"❌ Lỗi hệ thống khi thực hiện truy vấn: {error}")
+        
+    finally:
+        if conn:
+            cursor.close()
+            conn.close()
+
+if __name__ == "__main__":
+    # GIẢ LẬP TÌNH HUỐNG TRUY VẤN:
+    
+    # 1. Ý niệm/Yêu cầu hiện tại của AI được chuyển đổi thành 1 Vector 768 chiều ngẫu nhiên
+    mock_ai_concept_vector = np.random.uniform(-1.0, 1.0, 768)
+    
+    # 2. Định nghĩa các tiêu chí lọc cứng (DR)
+    target_topic = "Kien_Truc_He_Thong"
+    minimum_fuzzy_score = 0.80
+    
+    # 3. Kích hoạt bộ máy tìm kiếm lai
+    execute_hybrid_search(
+        search_topic=target_topic,
+        min_confidence=minimum_fuzzy_score,
+        query_vector=mock_ai_concept_vector,
+        limit_results=3
+    )
+```
 
