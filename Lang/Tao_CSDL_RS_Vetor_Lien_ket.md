@@ -91,3 +91,99 @@ USING hnsw (toa_do_tri_thuc vector_cosine_ops);
 -- ORDER BY toa_do_tri_thuc <=> '[0.012,-0.034,...,0.123]' ASC
 -- LIMIT 5;
 ```
+---
+
+## 🐳 4. Cấu hình Môi trường Chạy Thử nghiệm nhanh với Docker
+Để toàn bộ thành viên trong nhóm thiết lập nhanh cơ sở dữ liệu này trên Windows thông qua **Docker Desktop** mà không cần cài đặt PostgreSQL thủ công, hãy tạo một tệp tin đặt tên là `docker-compose.yml` trong thư mục dự án trên **Cursor**:
+
+```yaml
+version: '3.8'
+
+services:
+  postgres_hybrid_db:
+    image: pgvector/pgvector:pg16 # Sử dụng bản build sẵn tích hợp pgvector chính thức
+    container_name: ai_hybrid_database
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ai_developer
+      POSTGRES_PASSWORD: SecretPassword123
+      POSTGRES_DB: core_knowledge_base
+    volumes:
+      - postgres_ai_data:/var/lib/postgresql/data
+    restart: always
+
+volumes:
+  postgres_ai_data:
+```
+
+*Cách vận hành:* Mở Terminal trên Windows (hoặc terminal tích hợp trong Cursor), di chuyển tới thư mục chứa tệp tin trên và gõ lệnh: `docker-compose up -d`.
+
+---
+
+## 🐍 5. Script Python Kiểm thử Kết nối & Nạp Dữ liệu Mẫu (Embedding Pipeline)
+Dưới đây là mã nguồn Python để kiểm tra khả năng lưu trữ thực tế. Mã nguồn này sử dụng thư viện `psycopg2` và thư viện toán học `numpy` để giả lập việc tạo và đẩy một dòng tri thức lai (vừa chứa logic mờ, vừa chứa 768 chiều vector) vào cơ sở dữ liệu.
+
+### 🔹 Cài đặt thư viện bổ trợ trước khi chạy:
+```bash
+pip install psycopg2-binary numpy
+```
+
+### 🔹 Mã nguồn Python (`insert_sample_data.py`):
+```python
+import psycopg2
+import numpy as np
+
+def connect_and_seed():
+    # 1. Cấu hình thông số kết nối đến Docker Postgres
+    db_config = {
+        "host": "localhost",
+        "database": "core_knowledge_base",
+        "user": "ai_developer",
+        "password": "SecretPassword123",
+        "port": 5432
+    }
+    
+    try:
+        conn = psycopg2.connect(**db_config)
+        cursor = conn.cursor()
+        print("✅ Kết nối đến Cơ sở dữ liệu Lai thành công!")
+
+        # 2. Giả lập một Vector tri thức gồm 768 chiều (số thực ngẫu nhiên từ -1 đến 1)
+        # Trong thực tế, mảng này sẽ do thuật toán AI độc quyền của nhóm bạn tự tính toán và sinh ra
+        raw_vector = np.random.uniform(-1.0, 1.0, 768)
+        
+        # Chuẩn hóa Vector về dạng chuỗi văn bản theo định dạng định sẵn của pgvector: '[v1,v2,v3,...]'
+        vector_string = "[" + ",".join(map(str, raw_vector.tolist())) + "]"
+
+        # 3. Định nghĩa dữ liệu Lai (Cả dữ liệu cấu trúc DR và dữ liệu Vector AI)
+        data_to_insert = {
+            "ma_dinh_danh": "KNOW-ID-001",
+            "chu_de": "Kien_Truc_He_Thong",
+            "muc_do_tin_cay": 0.87, # Giá trị tham chiếu Logic mờ
+            "toa_do_tri_thuc": vector_string
+        }
+
+        # 4. Viết lệnh SQL chèn dữ liệu
+        insert_query = """
+        INSERT INTO kho_tri_thuc_ai (ma_dinh_danh, chu_de, muc_do_tin_cay, toa_do_tri_thuc)
+        VALUES (%(ma_dinh_danh)s, %(chu_de)s, %(muc_do_tin_cay)s, %(toa_do_tri_thuc)s)
+        ON CONFLICT (ma_dinh_danh) DO NOTHING;
+        """
+
+        cursor.execute(insert_query, data_to_insert)
+        conn.commit()
+        print(f"🚀 Đã nạp thành công bản ghi '{data_to_insert['ma_dinh_danh']}' vào bảng lưu trữ.")
+
+    except Exception as error:
+        print(f"❌ Lỗi trong quá trình kết nối hoặc ghi dữ liệu: {error}")
+    finally:
+        if conn:
+            cursor.close()
+            conn.close()
+            print("🔒 Đã ngắt kết nối an toàn với cơ sở dữ liệu.")
+
+if __name__ == "__main__":
+    connect_and_seed()
+```
+
