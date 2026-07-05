@@ -2,7 +2,7 @@
 
 **Document ID:** ARCH-20260705-020
 
-**Version:** 0.1 Draft
+**Version:** 0.2 Draft
 
 **Status:** Draft
 
@@ -38,25 +38,80 @@ Each Entity possesses its own identity, governance, permissions, responsibilitie
 
 ---
 
+# Core Entity Model Principle
+
+All AHI entities share the same Core Entity Model.
+
+This principle applies to:
+
+- AHI-P (AHI Personal)
+- AHI-O (AHI Organization)
+- AHI-G (AHI Government)
+- AHI-Omniverse
+
+Every Entity uses the same technical structure.
+
+The differences between entities are determined by:
+
+- Scope
+- Permissions
+- Governance
+- Ownership
+- Evolution
+
+This unified architecture enables seamless inheritance, interoperability and long-term evolution.
+
+An AHI-P may evolve into an AHI-O.
+
+An AHI-O may participate in one or more AHI-G.
+
+Every AHI-G may participate in AHI-Omniverse.
+
+The Core Entity Model never changes.
+
+Only governance, permissions, responsibilities and operating scope evolve.
+
+---
+
 # Entity Hierarchy
 
 ```
 Human
     │
     ▼
-AHI Personal
+AHI-P (AHI Personal)
     │
     ▼
-AHI Organization
+AHI-O (AHI Organization)
     │
     ▼
-AHI Government
+AHI-G (AHI Government)
     │
     ▼
-AHI Planetary
+AHI-Omniverse
 ```
 
-Each level inherits capabilities from the previous level while adding governance appropriate to its scale.
+AHI-Omniverse represents the planetary intelligence infrastructure and the External Brain of Humanity.
+
+It may securely store civilization-scale intelligence while ownership always remains with the original owner.
+
+Storage never implies access.
+
+---
+
+# Core Entity Identity
+
+Every Entity has exactly:
+
+- One Identity
+- One Owner
+- One Governance Model
+- One Evolution Model
+- One Permission Model
+- One Secret Space (SS)
+- One Intelligence Asset Graph
+
+These seven components form the technical DNA of every Entity in the AHI ecosystem.
 
 ---
 
@@ -70,53 +125,68 @@ The original owner of memories, knowledge and expert thinking.
 
 ---
 
-## AHI Personal
+## AHI-P (AHI Personal)
 
-The digital intelligence representing one individual.
+Represents one individual.
 
-Contains:
+Core Components:
 
 - Identity
-- Memory
 - Knowledge
+- Memory
 - Expert Thinking
-- Skills
+- Special Skills
 - Decisions
 - Relationships
+- Permissions
+- SS (Secret Space)
 - Governance
-- Evolution History
+- Evolution
 
-AHI Personal is managed by the living owner.
+AHI-P is managed by its living owner.
 
-When the biological person is no longer alive, management follows the genealogy rules defined by AHI-Sage.
+After biological death, governance follows the genealogy and inheritance rules defined by AHI-Sage and the AHI Constitution.
 
 ---
 
-## AHI Organization
+## AHI-O (AHI Organization)
 
 Represents a company, university, laboratory, association or any legal organization.
 
-An AHI Organization is formed by one or more AHI Personal entities.
+AHI-O is formed by one or more AHI-P entities.
 
-Ownership follows the organization's governance and shareholding structure.
+Governance follows the organization's constitution, ownership and legal structure.
 
 ---
 
-## AHI Government
+## AHI-G (AHI Government)
 
 Represents a governmental entity operating under the laws of a country or region.
 
 Governance follows applicable legislation.
 
-AHI Government coordinates AHI Organizations and AHI Personal entities within its jurisdiction.
+AHI-G coordinates AHI-O and AHI-P entities within its jurisdiction.
 
 ---
 
-## AHI Planetary
+## AHI-Omniverse
 
-Represents the global intelligence layer managed through AHI-Omniverse.
+Represents the planetary-scale intelligence infrastructure.
 
-Its mission is to preserve and evolve civilization-scale intelligence while respecting the sovereignty of all participating entities.
+AHI-Omniverse serves as the External Brain of Humanity.
+
+It provides:
+
+- Protocol Layer
+- Knowledge Layer
+- Collective Intelligence Layer
+- Evolution Layer
+
+AHI-Omniverse may store encrypted Intelligence Assets from participating entities.
+
+Ownership is never transferred automatically.
+
+Access is controlled entirely by permissions.
 
 ---
 
@@ -125,15 +195,60 @@ Its mission is to preserve and evolve civilization-scale intelligence while resp
 Every Entity contains:
 
 - Identity
-- Governance
-- Permissions
-- Memory
 - Knowledge
+- Memory
 - Expert Thinking
+- Special Skills
 - Intelligence Assets
+- Decisions
 - Relationships
-- Evolution State
+- Permissions
+- SS (Secret Space)
+- Governance
+- Evolution
 - Activity History
+
+---
+
+# Storage Classification
+
+Every Entity classifies information into four security levels.
+
+## Public
+
+Information that may be freely shared.
+
+## Protected
+
+Information shared only with authorized entities.
+
+## Private
+
+Information belonging exclusively to the owner.
+
+## Secret Space (SS)
+
+Secret Space is the highest security level.
+
+SS contains information that must never be disclosed without authorization.
+
+Examples include:
+
+- Personal secrets
+- Organizational confidential information
+- National strategic information
+- Cryptographic keys
+- Sensitive memories
+
+SS is always encrypted.
+
+SS may be securely backed up.
+
+Backup never grants access.
+
+Only the owner or authorized governance may decrypt SS.
+
+Encrypted SS may be used for Survival Recovery while remaining encrypted.
 
 ---
 
@@ -141,31 +256,20 @@ Every Entity contains:
 
 Every Entity owns its own Intelligence Assets unless explicit permission has been granted.
 
-Ownership remains with the original owner.
+Ownership always remains with the original owner.
 
-Sharing does not transfer ownership unless explicitly agreed.
+Sharing never transfers ownership unless explicitly agreed.
 
 ---
 
 # Governance
 
-Governance depends on Entity type.
+Each Entity manages itself.
 
-AHI Personal
-
-Managed by the individual.
-
-AHI Organization
-
-Managed according to organizational governance.
-
-AHI Government
-
-Managed according to applicable law.
-
-AHI Planetary
-
-Coordinates collaboration while respecting the sovereignty of participating entities.
+- AHI-P is managed by the individual.
+- AHI-O is managed by its organization.
+- AHI-G is managed by its government.
+- AHI-Omniverse coordinates interoperability through common protocols and standards while respecting sovereignty.
 
 ---
 
@@ -173,9 +277,11 @@ Coordinates collaboration while respecting the sovereignty of participating enti
 
 Every Entity evolves independently.
 
-Evolution is measured across the dimensions defined in the AHI Evolution Framework.
+Evolution follows the AHI Evolution Framework.
 
-Progress in one dimension does not automatically imply progress in another.
+Each Entity may evolve without changing its Core Entity Model.
+
+Only governance, permissions, responsibilities and operating scope evolve.
 
 ---
 
@@ -193,7 +299,7 @@ Entities may establish relationships including:
 - Investment
 - Collaboration
 
-Relationship models are defined in a separate document.
+Relationship models are defined separately.
 
 ---
 
@@ -201,13 +307,14 @@ Relationship models are defined in a separate document.
 
 Future versions of this model will introduce:
 
-- Digital Successor
+- Intelligence Asset Model
+- Secret Space Model
+- Digital Successor Model (HDSM)
 - Robot Entity
 - Device Entity
 - AI Agent Entity
 - Autonomous Enterprise
-- National Intelligence Network
-- Planetary Intelligence Network
+- Planetary Intelligence Federation
 
 ---
 
@@ -218,3 +325,5 @@ Future versions of this model will introduce:
 - Identity Model
 - Relationship Model
 - Governance Model
+- Intelligence Asset Model
+- Digital Successor Model
