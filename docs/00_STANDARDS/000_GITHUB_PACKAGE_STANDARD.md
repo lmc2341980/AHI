@@ -2,13 +2,13 @@
 
 **Document ID:** STD-20260705-000A
 
-Version: 1.0 Draft
+**Version:** 1.1
 
-Status: Draft
+**Status:** Approved
 
-Repository: AHI
+**Repository:** AHI
 
-Path: docs/00_STANDARDS/000_GITHUB_PACKAGE_STANDARD.md
+**Path:** docs/00_STANDARDS/000_GITHUB_PACKAGE_STANDARD.md
 
 ---
 
@@ -74,6 +74,10 @@ the Assistant shall generate an UPDATE package,
 
 instead of creating another document.
 
+The UPDATE package shall always regenerate the complete document.
+
+Partial updates, patches or manual merge instructions are not allowed.
+
 ---
 
 # Markdown Rule
@@ -81,6 +85,69 @@ instead of creating another document.
 The Markdown content shall not be interrupted.
 
 Users should be able to copy the complete document with one action.
+
+Official GitHub documents shall never be split into multiple independent Markdown fragments.
+
+---
+
+# Large Document Rule
+
+If a document exceeds the maximum response size supported by the current AI platform, the Assistant shall generate the complete document as a downloadable Markdown (*.md*) file.
+
+The Assistant shall never require the user to manually merge multiple responses.
+
+The official GitHub document shall always remain a single complete file.
+
+---
+
+# Single File Principle
+
+Every official GitHub document shall exist as one complete file.
+
+The Assistant shall always regenerate the complete document instead of asking the user to insert or replace individual sections.
+
+---
+
+# GitHub Workflow
+
+The standard GitHub workflow is:
+
+1. Generate one complete document.
+2. Copy or download the complete document.
+3. Replace the existing GitHub file.
+4. Commit the changes.
+5. Return to the AI session.
+6. Reply with the DONE command.
+
+---
+
+# User Experience Principle
+
+The AI shall always minimize user effort.
+
+Whenever multiple implementation methods are possible, the Assistant shall choose the method requiring the fewest user actions while minimizing mistakes and cognitive load.
+
+The AI shall adapt to the user.
+
+The user shall never be required to adapt to the AI.
+
+---
+
+# Platform Independence
+
+This standard applies to every AI platform participating in the AHI ecosystem.
+
+Examples include:
+
+- ChatGPT
+- Claude
+- Gemini
+- Grok
+- Future AHI applications
+
+Platform limitations shall never change the official document structure.
+
+Only the delivery method may change.
 
 ---
 
@@ -100,25 +167,27 @@ The Assistant shall continue automatically.
 
 # AI Responsibility
 
-PM
+PM (Project Manager)
 
-Defines priorities.
+Defines priorities and approves implementation direction.
 
-P
+P (Professor)
 
-Provides expertise.
+Provides expertise, architecture and technical review.
 
-L
+L (Team Leader)
 
-Reviews repository implementation.
+Reviews repository implementation and ensures repository consistency.
 
-S
+S (Secretary)
 
-Standardizes documentation.
+Standardizes documentation, meeting records and document quality.
 
-A
+A (Assistant)
 
-Integrates all opinions and generates GitHub Packages.
+Integrates all approved opinions and generates complete GitHub Packages.
+
+The Assistant is responsible for minimizing user effort and ensuring every package is ready for direct use.
 
 ---
 
@@ -127,3 +196,19 @@ Integrates all opinions and generates GitHub Packages.
 Every discussion shall become a GitHub Package.
 
 Every GitHub Package shall become reusable knowledge.
+
+Every approved GitHub Package shall become part of the long-term knowledge base of the AHI ecosystem.
+
+---
+
+# Future Evolution
+
+Future versions may automatically determine the optimal delivery method according to:
+
+- Document size
+- AI platform limitations
+- User preferences
+- Repository policies
+- AHI-Factory capabilities
+
+This optimization shall always remain transparent to the user.
