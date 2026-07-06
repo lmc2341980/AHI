@@ -216,3 +216,10 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+*.mp4
+*.mkv
+*.avi
+*.mov
+*.flv
+*.wmv
