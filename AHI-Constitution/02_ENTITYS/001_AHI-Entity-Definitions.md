@@ -59,34 +59,34 @@ Mọi Entity đều là Evolutionary Knowledge Model.
 
 # 4. Entity Index
 
-| Entity | Full Name | Category | Reference |
-|---------|-----------|----------|-----------|
-| AHI | Artificial Hybrid Intelligence | Ecosystem | Constitution |
-| AHI-F | AHI-Founder | Person | Constitution |
-| AHI-P | AHI-Person | Person | Specification |
-| AHI-Persons | AHI-Person Platform | Platform | Specification |
-| AHI-O | AHI-Organization | Organization | Specification |
-| AHI-G | AHI-Government | Government | Specification |
-| AHI-Or | AHI-Orchestrator | Platform | Specification |
-| AHI-Workspace | Workspace | Platform | Specification |
-| AHI-Studio | Cloud IDE | Platform | Specification |
-| AHI-Factory | Factory | Platform | Specification |
-| AHI-Core | Core | Platform | Specification |
-| AHI-Framework | Framework Repository | Platform | Specification |
-| AHI-S | AHI-Sage | Knowledge Network | Specification |
-| AHI-Old | External AI Collection | Platform | Specification |
-| AHI-V | Verify Engine | Platform | Specification |
-| AHI-Cache | Processing Layer | Platform | Specification |
-| AHI-BANK | Human Communication Framework | Framework | Specification |
-| AHI-PS | Human-Machine Interaction Layer | Framework | Proposal |
-| AHI-Lang | Language System | Platform | Specification |
-| AHI-E | AHI-Economy | Platform | Specification |
-| AHI-M | Marketplace | Platform | Specification |
-| AHI-Coin | Contribution Currency | Economy | Specification |
-| AHI-Energy | Energy Platform | Platform | Specification |
-| AHI-Investment | Investment Platform | Platform | Specification |
-| AHI-Successor | Successor Robot | Platform | Specification |
-| DBG | Evolutionary Database | Infrastructure | Specification |
+| STT | Entity | Full Name | Category | Reference |
+| :--- | :--- | :--- | :--- | :--- |
+| 1 | AHI | Artificial Hybrid Intelligence | Ecosystem | Constitution |
+| 2 | AHI-F | AHI-Founder | Person | Constitution |
+| 3 | AHI-P | AHI-Person | Person | Specification |
+| 4 | AHI-Persons | AHI-Person Platform | Platform | Specification |
+| 5 | AHI-O | AHI-Organization | Organization | Specification |
+| 6 | AHI-G | AHI-Government | Government | Specification |
+| 7 | AHI-Or | AHI-Orchestrator | Platform | Specification |
+| 8 | AHI-Workspace | Workspace | Platform | Specification |
+| 9 | AHI-Studio | Cloud IDE | Platform | Specification |
+| 10 | AHI-Factory | Factory | Platform | Specification |
+| 11 | AHI-Core | Core | Platform | Specification |
+| 12 | AHI-Framework | Framework Repository | Platform | Specification |
+| 13 | AHI-S | AHI-Sage | Knowledge Network | Specification |
+| 14 | AHI-Old | External AI Collection | Platform | Specification |
+| 15 | AHI-V | Verify Engine | Platform | Specification |
+| 16 | AHI-Cache | Processing Layer | Platform | Specification |
+| 17 | AHI-BANK | Human Communication Framework | Framework | Specification |
+| 18 | AHI-PS | Human-Machine Interaction Layer | Framework | Proposal |
+| 19 | AHI-Lang | Language System | Platform | Specification |
+| 20 | AHI-E | AHI-Economy | Platform | Specification |
+| 21 | AHI-M | Marketplace | Platform | Specification |
+| 22 | AHI-Coin | Contribution Currency | Economy | Specification |
+| 23 | AHI-Energy | Energy Platform | Platform | Specification |
+| 24 | AHI-Investment | Investment Platform | Platform | Specification |
+| 25 | AHI-Successor | Successor Robot | Platform | Specification |
+| 26 | DBG | Evolutionary Database | Infrastructure | Specification |
 
 ---
 
